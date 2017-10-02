@@ -1,0 +1,47 @@
+1) Matt Gannon
+
+2) The command cat just repeated whatever I said to it, i.e. I wrote “hello my name is Matt” and that is what I got back.
+
+3) The command cat < mars.txt printed the entirety of the text file to the console.
+
+4) cat > new.txt created a text file with the name “new.txt” that contained the line of characters I entered following the command.
+
+5) cat >> new.txt added a new line with my new text as if I had pressed enter and added it into my file. For fun I tried to do just cat > new.txt again with a different line of text and it replaced my entire file.
+
+6) #include <unistd.h>
+
+7) blank
+
+8) Read returns an int indicating the number of bytes read, which advances the file position. When the number returns 0, it indicates the end of the file.
+
+9) The code for my copy.c program is as follows:
+
+// Matt Gannon
+// 9/2/2017
+// A short program to mimic the behavior of cat
+
+#include <unistd.h>
+
+int main( int argc, char* argv[] ){
+        #define bufferSize 200
+        char buffer[ bufferSize ];
+
+        for (;;) {
+                int reader = read(STDIN_FILENO, buffer, bufferSize);
+                if (reader==0) {
+                        break;
+                }
+                write(STDOUT_FILENO, buffer, reader);
+        }
+        return 0;
+}
+
+10) I thought that changing the bufferSize would affect the length of what I was able to input, which I guess doesn’t make a ton of sense since mars.txt is clearly longer than 200 chars long.
+
+Still seemed to work with bufferSize 20. 
+Still seemed to work with bufferSize 5.
+Still seemed to work with bufferSize 1. 
+
+All tested the same ways 200 was, including my own input, as well as mars.txt and inputting to new.txt.
+
+11) I think having a large bufferSize would be beneficial with larger file sizes because you would be able to take advantage of your processor’s power to process large chunks of data at a time. However, with smaller file sizes, this difference becomes negligible.

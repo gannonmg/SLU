@@ -1,0 +1,12 @@
+1.  Matt Gannon, Matt Gottsacker
+
+2.  Real: 0.153 seconds (with bufferSize of 200 as third parameter of read() ).
+
+3.  8:    0.767 s
+    80:   0.204 s
+    800:  0.066 s
+    4096: 0.060 s
+
+4.  It is faster to make a few system calls that read many characters.  We think this result is due to the high throughput of our processors.  Because of their efficiency and numerous threads, they can process many characters at once, making it much faster to run the program by processing large chunks of data at a time.
+
+5.  None.

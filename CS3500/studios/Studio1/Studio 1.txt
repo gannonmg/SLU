@@ -1,0 +1,21 @@
+1) Matt Gannon, Matt Gottsacker
+
+2) #include <stdio.h>
+
+3) printf does not need a specified output stream, while the first arg of fprintf can print to a variety of outputs
+
+4) printf writes output to the standard output stream; fprintf writes output to the given output stream
+
+5) Hello, world!
+
+6) 2
+
+7) #include <unistd.h>
+
+8) blank
+
+9) Hello, world!
+
+10) A bunch of junk characters follow my Hello, World. I believe this happens because the program reads junk memory that is stored in my system following wherever hello world is stored.
+
+11) We believe that you would want to use the C library functions when you are developing a software product that will potentially be used across a variety of systems. This would save you from having to write totally unique code for each system that you want your product to be available on. An OS system call could be used when you are either designing a programming language that needs to work directly with the system’s architecture. Another possibility is that the system calls are quicker because they work at a lower level than the C library functions.

@@ -1,0 +1,53 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) Please enter your input here: Hello, world!
+User input was: Hello, world!
+
+3) The first time you call strtok() you must specify str, the first argument. Any calls after the first must pass a null pointer instead of str.
+
+4) For regular text input you would use space (“ “) as your delimiter to mark the boundary of tokens.
+
+5) Please enter your input here: Hello my name is Matt
+User input was: Hello my name is Matt
+First token was: Hello
+
+6) Please enter your input here: Hello my name is Matt
+User input was: Hello my name is Matt
+First token was: Hello
+Hello
+my
+name
+is
+Matt
+
+7) char* token = strtok(input, " ");
+//printf("First token was: %s\n", token);
+while (token != NULL)
+{
+	printf ("%s\n", token);
+	token = strtok (NULL, " \n"); // The 
+}
+
+8) Blank
+
+9) cmd = token; (later adjusted to cmd = res;)
+
+10) char* res = strtok(input, " ");
+    //printf("First token was: %s\n", res);
+    cmd = res;
+    my_argv[0] = cmd;
+    int i = 1;
+    while (res != NULL)
+    {
+        printf ("%s\n", res);
+        res = strtok(NULL, " \n");
+        my_argv[i] = res;
+        i++;
+    }
+    my_argv[i] = NULL;
+
+11) Please enter your input here: cat test.txt
+User input was: cat test.txt
+cat
+test.txt
+I am going to try and cat this file using my structure from Studio 6. Wish me luck!

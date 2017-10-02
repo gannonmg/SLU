@@ -1,0 +1,34 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) 
+50752
+50753
+50754
+
+3) After inserting fork() at the beginning of my program, the output now has two PIDs.
+
+50777
+50778
+
+4) When fork is called successfully, it returns 0 to the child process and returns the PID of the child to the parent. If it is not successful, it returns the value -1 to the parent process, does not create a child process, and errno is set to indicate the error.
+
+5) Child PID: 51180
+Parent PID: 51179
+
+6) This does not work exactly as I expected. I thought the program would hang until the child process printed its PID, however, it actually went back to the command line and let me do things there while it waited to print the child PID.
+
+7) The program now hangs for the three seconds before printing the child PID immediately followed by the parent PID.
+
+8) Studio 5.txt
+fork
+fork.c
+makefile
+
+9) Child PID: 51198
+total 56
+-rw-r--r--@ 1 mattgannon  staff   861 Sep 16 15:53 Studio 5.txt
+-rwxr-xr-x  1 mattgannon  staff  8884 Sep 16 15:53 fork
+-rw-r--r--@ 1 mattgannon  staff   672 Sep 16 15:53 fork.c
+-rw-r--r--@ 1 mattgannon  staff   139 Sep 11 13:56 fork.h
+-rw-r--r--  1 mattgannon  staff    25 Sep 15 13:54 makefile
+Parent PID: 51197

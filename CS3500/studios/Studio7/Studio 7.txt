@@ -1,0 +1,44 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) Please enter your input here: Hello, world!
+this is my program
+User input was: this is my program
+Please enter your input here: this is my program working without piping
+User input was: this is my program working without piping
+Please enter your input here: 
+
+3) fd[1] contains the write end of the pipe, fd[0] contains the read end of the pipe.
+
+4) The second argument is the one closed when the function succeeds.
+
+5) 
+// dup2 code in first child
+	dup2(fd[1], STDOUT_FILENO);
+        char* cmd = "./print";
+        char* myargv[] = {cmd, NULL};
+        close(fd[0]);
+        int ret = execvp( cmd, myargv );
+        if (ret == -1) {
+            perror("Error exec'ing print");
+        }
+// dup2 code in second child
+	dup2(fd[0], STDIN_FILENO);
+        char* cmd = "./program2";
+        char* myargv[] = {cmd, NULL};
+        close(fd[1]);
+        int ret = execvp( cmd, myargv );
+        if (ret == -1) {
+            perror("Error exec'ing program 2");
+        }
+//dup2 code in parent
+	close(fd[0]);
+        close(fd[1]);
+
+6) Program 2 got: This is program 1.
+
+// We edited the output of both programs to be more helpful in identifying which program was doing what
+
+7) Program 2 got: This is program 1.
+
+8) a) Because it is file agnostic, you don’t have to worry about the different types of data. You can use the same pipe for any file that you are trying to transfer.
+b) It allows you to create a more modular program structure, so programs you write (such as program 2) that might have use elsewhere can be implemented into a variety of larger scale programs (aka decoupling).

@@ -1,0 +1,36 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) __sync_add_and_fetch() takes a pointer to a variable as well as another value and adds them in an atomic manner. The interface for this function is __sync_add_and_fetch(*variable, value)
+
+3) Test before: 0
+Test after: 1
+
+4) Race is 0
+
+5) Average time for 20mil iterations using __sync_add/sub_and_fetch is 1.000s.
+
+Race is 0
+
+real	0m0.943s
+user	0m1.877s
+sys	0m0.002s
+
+Race is 0
+
+real	0m1.080s
+user	0m2.149s
+sys	0m0.002s
+
+Race is 0
+
+real	0m0.978s
+user	0m1.946s
+sys	0m0.003s
+
+6) Average time for using mutex for 20mil iterations (for each iteration) was 2m4.789s.
+
+7) The atomic instructions variation is much faster. The atomic variation is nearly 125x faster than the mutex version (124.789s/1.000s).
+
+8) The racy program averages at about 0.153s per run. The atomic variation takes about 6.536x longer to run than the racy program.
+
+9) Mutex locking would be more beneficial in scenarios where you need larger sections of critical process. Atomic instructions are more beneficial in scenarios where you only need simple instructions that can be executed in an atomic manner.

@@ -1,0 +1,40 @@
+1) Matts Gannon & Gottsacker
+
+2) No answer requested
+
+3) Blank
+
+4) No answer requested
+
+5) I think the pointer winString points to the character “W”, i.e. the beginning of the string “Windows!”
+
+6) W
+
+7) i
+
+8) No answer requested
+
+9) I think that it will print the entire string beginning at whatever pointer value the loop is currently at.
+
+It printed the following, confirming my guess:
+
+Windows!
+indows!
+ndows!
+dows!
+ows!
+ws!
+s!
+!
+
+10)
+M
+i
+n
+i
+x
+!
+
+11) Trying to modify winString the same way we did linString results in a seg fault when you attempt to run the program.
+
+12) The program runs properly, except the string “Windows!” is replace with “Solaris!” every time it is called. I kept my code from all the previous questions for this studio, and it correctly swapped the strings every time. I think this outcome is due to winString being placed in memory. If you modify it there it will be correctly modified whenever it is dereferenced.

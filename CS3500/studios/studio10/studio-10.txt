@@ -1,0 +1,46 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) 
+void adder(race) {
+    int i = 0;
+    for(; i<2000000; i++) {
+        race++;
+    }
+}
+
+void subtractor(race) {
+    int i = 0;
+    for(; i<2000000; i++) {
+        race--;
+    }
+}
+
+3) I think the program will hang slightly as it computes all 4 million commands. It did just this, and as a point of curiosity, I printed the final value of race (which started at race = 0), and the program output “Race is -2145483649.” When I called the functions instead of just executing the two for loops in main, the program ran almost instantly and correctly returned “Race is 0.” 
+
+4) I think the value of race will be random each time depending on the speed at which each thread accesses the data location race is stored at.
+
+5) Race is -766745
+Race is 249343
+Race is 660629
+Race is -605343
+Race is -197054
+Race is 311795
+Race is -330189
+Race is -115288
+
+6) I think this is happening because both threads are accessing the same location of race in the system memory to do their computations. Based on the result I receiver in question 3, I do not think that race has a max or min value
+
+7) Yes, the program still exhibits the same behavior with values, 1,000,000 and 500,000 in the adder and subtractor functions. When the value is only 1000, the program typically returns 0, but occasionally will print small, incorrect values such as “-414”, “-82”, and “-129”.
+
+8) No, it could not. Because there would only be one core, only one thread would be able to run at a time.
+
+9) By restricting the program to only operating on one processor, it always (out of ~50 tests) resolves int race to 0 correctly.
+
+10) The program takes much longer to run, but race still resolves to 0 by the end of the program.
+
+11) The program was so much slower because the single processor had to execute 400 million  commands. However, it returned the anticipated result of race = 0 because only one process was accessing that space in memory at a time. 
+
+
+
+
+

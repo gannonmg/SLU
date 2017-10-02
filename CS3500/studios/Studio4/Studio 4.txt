@@ -1,0 +1,65 @@
+1) Matts Gannon & Gottsacker
+
+2) 
+
+// Matt Gannon
+// 9/11/2017
+// A program to open a file stored on the computer
+
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+#define bufferSize 200
+
+int main( int argc, char* argv[] ) {
+    
+    char buffer[bufferSize];
+    
+    int input = open(argv[1], O_RDONLY);
+    
+    for (;;) {
+        int reader = read(input, buffer, bufferSize);
+        if (reader==0) {
+            break;
+        }
+        write(STDOUT_FILENO, buffer, reader);
+    }
+
+    return 0;
+}
+
+3) When you specify a file that doesn’t exist, the file runs without printing anything to the console until you force it to quit.
+
+4) The same thing happens as when you try to run the program with a file that doesn’t exist.
+
+5) open() returns -1 in the event of an error and sets errno appropriately.
+
+6) 
+
+if (input == -1) {
+    perror("Error");
+    exit(-1);
+}
+
+7) perror("Error opening file”);
+
+8) Blank
+
+9) It prints the message: 
+Error opening file: No such file or directory
+
+10) It prints the message: 
+Error opening file: Permission denied
+
+11) man 2 open: returns -1 on failure. Sets errno.
+
+man 2 close: Returns 0 upon successful completion, and -1 on failure. Sets errno.
+
+man 2 read: When successful, returns the number of bytes read. Returns 0 upon reading the end-of-file. Returns -1 for an error. Sets errno.
+
+man 2 write: When successful, returns the number of bytes written. Otherwise returns -1. Sets errno.
+
+man 3 printf: This family of functions returns the number of characters printed (not including \0 used to end strings). Excepts are snprintf() and vsnprintf() if the argument size were unlimited. Returns a negative value if an error occurs. Does not set errno.
+
+12) Error checking in this manner simplifies software development because 1) with an immediate exit from the program instead of waiting for a stalled program, the developer can more quickly understand if their program is working properly and taking the correct inputs, and 2) the specific error codes inform the developer what went wrong when running the program.

@@ -1,0 +1,59 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) Sleeper's PID is: 81471
+Slept for 0 iterations!
+Slept for 1 iterations!
+Slept for 2 iterations!
+Slept for 3 iterations!
+Slept for 4 iterations!
+Slept for 5 iterations!
+Slept for 6 iterations!
+Slept for 7 iterations!
+Slept for 8 iterations!
+Slept for 9 iterations!
+Slept for 10 iterations!
+Slept for 11 iterations!
+Slept for 12 iterations!
+Slept for 13 iterations!
+Slept for 14 iterations!
+Slept for 15 iterations!
+
+3) SIGINT has numeric value 2. It terminates a process by interrupting the program.
+
+4) The sleeper process is interrupted in the same manner as it was when we pressed CTRL-C in problem 2.
+
+5) We sent signal 8, which is described as the Floating point exception signal. The program exited when we sent the signal and also print the reason for exiting.
+
+Sleeper's PID is: 81480
+Slept for 0 iterations!
+Slept for 1 iterations!
+Slept for 2 iterations!
+Slept for 3 iterations!
+Slept for 4 iterations!
+Slept for 5 iterations!
+Slept for 6 iterations!
+Floating point exception (core dumped)
+
+6) Both programs terminate. The sleeper stopped its count, but the calling program did not return it’s success message.
+
+7) // Above main, after includes
+void handler (int signum) {
+    printf(“\nThis program is ignoring SIGINT\n");
+}
+
+// At the very beginning of main
+signal(2, handler);
+
+8) Forking sleeper...
+Waiting for sleeper 81731...
+Sleeper's PID is: 81731
+Slept for 0 iterations!
+Slept for 1 iterations!
+Slept for 2 iterations!
+Slept for 3 iterations!
+Slept for 4 iterations!
+^C
+This program is ignoring SIGINT
+Parent finished waiting and returned successfully!
+
+9) Another situation where signal handling might be useful is when a program is totally unresponsive, so the user can press CMD-Q/CTRL-Q (depending on your OS) to totally terminate/force-quit an unresponsive program (or ensure a program you are not actively using is not using your computer’s resources).

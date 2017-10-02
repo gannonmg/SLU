@@ -1,0 +1,92 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) //Create mutex
+    pthread_mutex_t mutex; // this one in global
+    int mutex_ret = pthread_mutex_init(&mutex, NULL);
+
+3) blank
+
+4) I think adding the mutex locks into our program will get it to return the correct value. As a trade off for this behavior, I think it will take longer to run, since the threads will have to wait to access the data that they need.
+
+5) Yes, the program output matched my expectations. By restricting access to the data until each thread is done with it, I was able to to stop the erratic behavior that could be seen by the the unlocked race conditions in the previous studio. If I put the mutex lock/unlocks within the for loop, the program takes a very lengthy time to run, but when I put them outside the for loops but still restricting access to int race, the program runs much more efficiently.
+
+Race is 0
+Race is 0
+Race is 0
+Race is 0
+Race is 0
+Race is 0
+Race is 0
+Race is 0
+etc...
+
+6) Average time for ./race program with 20,000,000 iterations: 1.901 seconds
+
+Race is 47828238
+
+real	0m1.259s
+user	0m2.502s
+sys	0m0.000s
+
+Race is 198667327
+
+real	0m2.194s
+user	0m4.104s
+sys	0m0.001s
+
+Race is -141294676
+
+real	0m2.250s
+user	0m4.273s
+sys	0m0.002s
+
+7) Average time for ./mute with lock()/unlock() within the loop of 20mil iterations: 2m4.789s
+
+Race is 0
+
+real	2m5.598s
+user	0m12.039s
+sys	2m3.651s
+
+Race is 0
+
+real	2m3.085s
+user	0m11.720s
+sys	2m1.415s
+
+Race is 0
+
+real	2m5.684s
+user	0m12.170s
+sys	2m2.893s
+
+8) Average time for ./mute with lock()/unlock() outside the loop of 20mil iterations: 0.097 seconds. This is roughly 20x faster than the original racy program.
+
+Race is 0
+
+real	0m0.097s
+user	0m0.094s
+sys	0m0.001s
+
+Race is 0
+
+real	0m0.098s
+user	0m0.095s
+sys	0m0.001s
+
+Race is 0
+
+real	0m0.095s
+user	0m0.092s
+sys	0m0.001s
+
+9) I think the fact that the two threads are not trying to simultaneously access the same data, and instead have uninterrupted access to it for their entire durations, makes the mutex locked variation so much faster than the racy variation.
+
+10) I think the per-iteration variation would be more appropriate when one thread relies on computations done by the other to get correct information, and can’t wait until it is complete. The per-thread variation is more appropriate when you care more about speed and the final product, like we did here, and did not care about the order in which the computations were done.
+
+
+
+
+
+
+
