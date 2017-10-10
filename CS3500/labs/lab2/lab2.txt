@@ -1,0 +1,5 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) There are currently no known errors in our code.
+
+3) We attempted (and succeeded at implementing) the extra credit.
