@@ -1,2 +1,2 @@
 all:
-	gcc crack.c -o crack
+	gcc crack.c -o crack -lpthread -lcrypt

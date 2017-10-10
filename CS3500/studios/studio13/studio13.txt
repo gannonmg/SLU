@@ -1,0 +1,68 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) 7 is prime
+23 is prime
+101 is prime
+982451653 is prime
+14 is not prime
+106 is not prime
+107 is prime
+
+3) Output:
+
+982451653 is prime
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.001s
+
+4) Output:
+2 is prime
+3 is prime
+5 is prime
+7 is prime
+11 is prime
+13 is prime
+17 is prime
+19 is prime
+23 is prime
+29 is prime
+31 is prime
+37 is prime
+41 is prime
+43 is prime
+47 is prime
+53 is prime
+59 is prime
+61 is prime
+67 is prime
+71 is prime
+73 is prime
+79 is prime
+83 is prime
+89 is prime
+97 is prime
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.001s
+
+5) Testing each number is logically independent because it is run through is_prime() individually and its return value does not impact the other numbers computations at all.
+
+6) Testing 7 and 9 in this case is not independent of testing the number 5 because if it turns out that N is divisible by 5, you do not need to continue testing it for numbers larger than 7 and 9.
+
+7) Both programs output the correct primes, but the parallelized version does not print them in sequential order.
+
+8) For 1 mil, the sequential program took on average 0.366s on hopper. On average, the parallelized program took 0.034s.
+
+For 20 mil, the sequential program took 24.648s on hopper. On average, the parallelized program took 1.537s.
+
+9) 
+
+
+
+
+
+
+
+

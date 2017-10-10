@@ -1,0 +1,80 @@
+1) Matt Gannon
+
+2) ‘pass’ corresponds to the target ‘abccBcrPOxnLU’.
+
+3) ‘ferry’ corresponds to the target ‘xyxMB6gxuiBZg’
+
+4) For one thread to check over every potential combination of five letter passwords took 1m6.560s.
+
+5) 2 threads: 0m28.066s
+4 threads: 0m15.148s
+8 threads: 0m7.750s
+13 threads: 0m5.685s
+26 threads: 0m3.533s
+
+6) Threads - hash rate
+1  - 178506.252  - 423336.99144  - 784352.78588  - 1533080.77413 - 2089951.80324 - 3362970.846
+
+7) Graph included in submission
+
+8) 
+
+2	2.371552768 x faster4	4.393979403 x faster8	8.588387097 x faster13	11.70800352 x faster26	18.83951316 x faster
+
+Up through 8 threads, the program increases speed at a relatively constant slope, as was anticipated. Originally, the program had no increase in speed when searching for a nonexistent password. This was because all threads, including the first starting at “aaaaa”, would each attempt strings all the way to “zzzzz” unless a thread successfully found the password and set global variable “found” to 1. I remedied this by setting the first letter to char t (thread number - skipping no characters) and shifting each following search by int n (number of threads) which effectively allowed the threads to have an equal total workload by covering alternating starting characters.
+
+9) The highest hash rate I received was 3362970.846.
+
+10) With only lowercase letters, the program would have to search 208,827,064,576 hashes to exhaustively search the keyspace for keysizes of one through eight.
+
+11) At my maximum rate, it would take roughly 62,096.008 seconds, or 17h 14m 56s to exhaust each keyspace. The benefit of increasing key length is that if the password length is unknown, you have a better chance of finding the password with a larger key size. This is especially beneficial when you use key size 8, because crypt only uses the first 8 characters of a password, so it would eventually find all variations of lowercase letters that would be able to crack the hash.
+
+12) Upper and lower case (52 chars): 1h 37m 59s
+Upper, lower, digits (62 chars): 4h 41m 30s
+Upper, lower, digits, symbols (93 chars): 2d 5h 26m 26s
+
+13) My program deviates from the lab instructions by implementing a cap on the number of threads allowed. When only lowercase passwords are searched, the maximum number of threads is 26, one thread for each possible first character. The program will still run if a number greater than 26 is entered for the threads, but it alerts the user that it is changing the number of threads to 26. For the extra credit, it exhibits the same behavior, except with a limit of 93, again one thread for each starting character. 
+
+Note: For unknown reasons, the program returns ‘Segmentation fault (core dumped)’ for threads 64 and above. Temporary fix by changing the cap from 93 to 63. 
+
+14) I attempted all three extra credit problems. Solutions are below:
+
+Extra credit: 
+
+Five letter passwords hashes:
+
+abA.g8pU2Iffo - salts
+cdfnIXMyMCpPg - salts
+efgC/gw8PDKhs - salts
+ghLneTdBMxJP. - salts
+ijSsXTgIC7QRU - salts
+klr7dT7cAODsk - donot
+mn4iWfK0m76t6 - skipp
+opjPsgpXaahxM - anyyy
+qr6ncfvfqecME - salts
+
+Why are salts useful?
+Salts are useful because they stop attackers from being able to keep tabs on hashes for commonly used passwords. Say, for example, many people use ‘password’ as their password. Without salts, the resulting hash could become easily recognizable, and attackers could just search a database for common hashes. However, with salts, if 100 people used ‘password’, they could each have unique hashes thanks to different salts. 
+
+Extra credit 3: I implemented the ability to add a fourth parameter to my program to include uppercase, digits, and symbols in the search. I test this as far as printing out password combinations from length 3 down to make sure that seemingly all possible combinations would be found, grep-ing a few random ones along the way as well.
+
+Results from decrypting running the following commands:
+$ time ./crack 40 5 qr6ncfvfqecME 1
+Password is: salts
+End of program
+
+real	27m53.456s
+user	824m26.747s
+sys	0m1.434s
+
+$ time ./crack 40 5 naCMervQcf0ts 1
+Password is: Apple
+End of program
+
+real	8m51.657s
+user	336m12.716s
+sys	0m2.650s
+
+The reason ‘Apple’ was found so much faster than ‘salts’ is because ‘A’ occurs much earlier in ASCII than ’s’, so strings starting with ‘A’ were checked by the threads before those starting with ’s’.
+
+
