@@ -1,0 +1,98 @@
+1) Matt Gannon and Matt Gottsacker
+
+2) $ ./config 25
+Thread_num is 4, loop index is 14
+Thread_num is 1, loop index is 5
+Thread_num is 2, loop index is 8
+Thread_num is 6, loop index is 20
+Thread_num is 7, loop index is 23
+Thread_num is 3, loop index is 11
+Thread_num is 0, loop index is 2
+Thread_num is 5, loop index is 17
+Thread_num is 4, loop index is 15
+Thread_num is 1, loop index is 6
+Thread_num is 2, loop index is 9
+Thread_num is 6, loop index is 21
+Thread_num is 7, loop index is 24
+Thread_num is 3, loop index is 12
+Thread_num is 0, loop index is 3
+Thread_num is 5, loop index is 18
+Thread_num is 4, loop index is 16
+Thread_num is 1, loop index is 7
+Thread_num is 2, loop index is 10
+Thread_num is 6, loop index is 22
+Thread_num is 7, loop index is 25
+Thread_num is 3, loop index is 13
+Thread_num is 0, loop index is 4
+Thread_num is 5, loop index is 19
+
+3) $ ./config 25
+Thread_num is 6, loop index is 20
+Thread_num is 1, loop index is 5
+Thread_num is 5, loop index is 17
+Thread_num is 3, loop index is 11
+Thread_num is 2, loop index is 8
+Thread_num is 0, loop index is 2
+Thread_num is 4, loop index is 14
+Thread_num is 7, loop index is 23
+Thread_num is 6, loop index is 21
+Thread_num is 1, loop index is 6
+Thread_num is 5, loop index is 18
+Thread_num is 3, loop index is 12
+Thread_num is 2, loop index is 9
+Thread_num is 0, loop index is 3
+Thread_num is 4, loop index is 15
+Thread_num is 7, loop index is 24
+Thread_num is 6, loop index is 22
+Thread_num is 1, loop index is 7
+Thread_num is 5, loop index is 19
+Thread_num is 3, loop index is 13
+Thread_num is 2, loop index is 10
+Thread_num is 0, loop index is 4
+Thread_num is 4, loop index is 16
+Thread_num is 7, loop index is 25
+max_threads is 8
+
+4) $ ./config 25
+Thread_num is 0, loop index is 2
+Thread_num is 1, loop index is 7
+Thread_num is 2, loop index is 12
+Thread_num is 4, loop index is 22
+Thread_num is 3, loop index is 17
+Thread_num is 0, loop index is 3
+Thread_num is 1, loop index is 8
+Thread_num is 2, loop index is 13
+Thread_num is 4, loop index is 23
+Thread_num is 3, loop index is 18
+Thread_num is 0, loop index is 4
+Thread_num is 1, loop index is 9
+Thread_num is 2, loop index is 14
+Thread_num is 4, loop index is 24
+Thread_num is 3, loop index is 19
+Thread_num is 0, loop index is 5
+Thread_num is 1, loop index is 10
+Thread_num is 2, loop index is 15
+Thread_num is 4, loop index is 25
+Thread_num is 3, loop index is 20
+Thread_num is 0, loop index is 6
+Thread_num is 1, loop index is 11
+Thread_num is 2, loop index is 16
+Thread_num is 3, loop index is 21
+max_threads is 5
+
+5) Each thread handles up to five iterations.
+
+6) It could be undesirable to decide up the work by iteration if one iteration requires much more computational power. For example, in this program, even numbers quickly return 0 in the is_prime() function, whereas a large, odd number immediately following that even number might take a long time to return. Also, openmp splits it by iteration, so the last thread gets the last chunk of high numbers, which would be unfair in cases where higher numbers == more computation.
+
+7) Hypothesis: The program will take one second longer than normal.
+
+Results: Originally, I was confused because only the first three iterations paused, and the program took 0m3.022s to run. I then realized this was because index begins at 2, not 0, so I adjust the given if statement to sleep(1) while i <=6 instead. This returned the hypothesized results, with config.c taking 0m5.032s to run.
+
+8) My program now takes 0m1.012s to run.
+
+9) The first thread no longer handles indexes 2-6, instead, those are split evenly between each of the five threads.
+
+10) The chunk size dictates the grouping of the indexes with each thread. For example, setting chunk size to 5 exhibited the same behavior as when we first implemented sleep(1), because the first 5 iterations were in the same thread’s chunk. Setting chunk size to 25 assigned all 25 iterations to a single thread. 
+
+
+
